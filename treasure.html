@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
             margin: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: auto;
             padding: 20px;
             border: 2px solid #333;
@@ -43,6 +43,32 @@
             color: purple;
             background-color: #f3e6ff;
         }
+        .game-field {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            gap: 5px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .location {
+            width: 60px;
+            height: 60px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+        }
+        .location img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -53,7 +79,24 @@
         <p id="score">Score is zero.</p>
         <p class="clickable">Click for help.</p>
         <p id="help">Help report</p>
+        <div class="game-field">
+            <!-- Generating 5 rows -->
+            <script>
+                document.write('<div class="game-field">');
+                let idCounter = 1;
+                for(let i = 0; i < 5; i++) {
+                    document.write('<div class="row">');
+                    for(let j = 0; j < 7; j++) {
+                        document.write(`<div class="location"><img id="img${idCounter}" src="cactus.jpg" alt="Cactus"></div>`);
+                        idCounter++;
+                    }
+                    document.write('</div>');
+                }
+                document.write('</div>');
+            </script>
+        </div>
     </div>
 </body>
 </html>
+
 
