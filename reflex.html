@@ -25,14 +25,14 @@
         }
         #goButton {
             background-color: #4CAF50; /* Green */
-            color: rgb(164, 253, 225);
+            color: white;
         }
         #goButton:hover {
             background-color: #45a049; /* Darker green on hover */
         }
         #haltButton {
             background-color: #f44336; /* Red */
-            color: rgb(227, 241, 136);
+            color: white;
         }
         #haltButton:hover {
             background-color: #da190b; /* Darker red on hover */
@@ -53,6 +53,7 @@
     <script>
         // Step 5a: Initialize variables
         let haltTime; // This will store the time when the halt button is pressed
+        let countdownRunning = false; // Flag to track if countdown is running
 
         // Step 5b: Function to record time when halt is pressed
         function recordTime() {
@@ -63,8 +64,39 @@
         // Step 5c: Set the onclick property of the Halt button to call recordTime()
         document.getElementById('haltButton').onclick = recordTime;
 
-        // Step 6: Verify if the time is being captured in the console
-        // This will be checked in the browser's developer console
+        // Step 6: Function to start the countdown
+        function beginTime() {
+            if (countdownRunning) return; // Prevent multiple countdowns at the same time
+            countdownRunning = true; // Mark countdown as running
+            let count = 5; // Start from 5 seconds
+
+            // Start the countdown
+            for (let i = 0; i <= 5; i++) {
+                setTimeout(function() {
+                    document.getElementById('counter').innerHTML = i; // Display the countdown
+                }, i * 1000); // Delay each update by i seconds
+            }
+
+            // After the countdown ends, check if user pressed Halt
+            setTimeout(function() {
+                if (haltTime === undefined) {
+                    // User was too slow
+                    document.getElementById('target').innerHTML = "Not soon enough";
+                } else {
+                    // User pressed Halt, so check the time
+                    let targetTime = Date.now(); // Record the current time when Halt was pressed
+                    let elapsedTime = targetTime - haltTime; // Calculate the time difference
+                    let elapsedSeconds = Math.abs(Math.round(elapsedTime / 1000)); // Convert ms to seconds
+
+                    // Display the elapsed time
+                    document.getElementById('target').innerHTML = "Time was " + elapsedSeconds + " seconds";
+                }
+                countdownRunning = false; // Reset the countdown flag
+            }, 5000); // After 5 seconds, check if the user pressed the Halt button
+        }
+
+        // Set the onclick property of the Go button to start the countdown
+        document.getElementById('goButton').onclick = beginTime;
     </script>
 </body>
 </html>
