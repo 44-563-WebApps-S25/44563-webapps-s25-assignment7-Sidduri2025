@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaishnavi's Reflexes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #target, #counter {
+            font-size: 24px;
+            margin: 20px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        #goButton {
+            background-color: #4CAF50; /* Green */
+            color: rgb(164, 253, 225);
+        }
+        #goButton:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        #haltButton {
+            background-color: #f44336; /* Red */
+            color: rgb(227, 241, 136);
+        }
+        #haltButton:hover {
+            background-color: #da190b; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Vaishnavi's Reflexes</h1>
+
+    <!-- Displaying Time and Countdown -->
+    <div id="target">Your time</div>
+    <div id="counter">Count</div>
+
+    <!-- Buttons for Go and Halt -->
+    <button id="goButton">Go</button>
+    <button id="haltButton">Halt</button>
+
+    <script>
+        // Step 5a: Initialize variables
+        let haltTime; // This will store the time when the halt button is pressed
+
+        // Step 5b: Function to record time when halt is pressed
+        function recordTime() {
+            haltTime = Date.now(); // Record current time (in milliseconds)
+            console.log("Halt time recorded at: " + haltTime); // Log the time to the console
+        }
+
+        // Step 5c: Set the onclick property of the Halt button to call recordTime()
+        document.getElementById('haltButton').onclick = recordTime;
+
+        // Step 6: Verify if the time is being captured in the console
+        // This will be checked in the browser's developer console
+    </script>
+</body>
+</html>
+
