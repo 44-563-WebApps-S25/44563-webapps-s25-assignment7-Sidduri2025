@@ -45,91 +45,63 @@
 <body>
 
     <h1>Vaishnavi Builds List with Divs</h1>
-
-    <!-- Input and buttons for adding and removing items -->
     <input type="text" id="inputText" placeholder="Enter item" />
     <br />
     <button id="addEndButton">Add end</button>
     <button id="addFrontButton">Add front</button>
     <button id="removeButton">Remove</button>
-
-    <!-- Flex container to hold the div items -->
     <div id="flex-container">
-        <!-- Initial div items -->
         <div class="divlist">Item 1</div>
         <div class="divlist">Item 2</div>
         <div class="divlist">Item 3</div>
     </div>
-
     <script>
-        // Get references to elements
         const addEndButton = document.getElementById('addEndButton');
         const addFrontButton = document.getElementById('addFrontButton');
         const removeButton = document.getElementById('removeButton');
         const inputText = document.getElementById('inputText');
         const flexContainer = document.getElementById('flex-container');
-
-        // Function to add a new item at the end of the list
         function addItemEnd() {
-            const inputValue = inputText.value.trim(); // Get value from input
-            if (inputValue !== "") {  // Check if input is not empty
-                // Create a new div element
+            const inputValue = inputText.value.trim(); 
+            if (inputValue !== "") {  
                 const newDiv = document.createElement('div');
-                
-                // Set the content and class for the new div
-                newDiv.innerHTML = inputValue;  // Set the text content
-                newDiv.className = "divlist";   // Set class to "divlist"
-                
-                // Append the new div to the container
+                newDiv.innerHTML = inputValue;  
+                newDiv.className = "divlist";   
                 flexContainer.appendChild(newDiv);
-                
-                // Clear the input field after adding
                 inputText.value = "";
             }
         }
-
-        // Function to add a new item at the front of the list
         function addItemFront() {
-            const inputValue = inputText.value.trim(); // Get value from input
-            if (inputValue !== "") {  // Check if input is not empty
-                // Create a new div element
+            const inputValue = inputText.value.trim(); 
+            if (inputValue !== "") {  
                 const newDiv = document.createElement('div');
-                
-                // Set the content and class for the new div
-                newDiv.innerHTML = inputValue;  // Set the text content
-                newDiv.className = "divlist";   // Set class to "divlist"
-                
-                // Add the new div to the front of the container using insertBefore
+                newDiv.innerHTML = inputValue;  
+                newDiv.className = "divlist";   
                 flexContainer.insertBefore(newDiv, flexContainer.firstChild);
-                
-                // Clear the input field after adding
                 inputText.value = "";
             }
         }
-
-        // Function to remove the middle item from the list
         function removeItem() {
-            // Get all divs with the class "divlist"
             const divListItems = document.getElementsByClassName('divlist');
-            
-            // Get the length of divListItems
             const length = divListItems.length;
-            
-            // Check if the length is greater than 0 to avoid errors
             if (length > 0) {
-                // Find the middle index using Math.floor
                 const middleIndex = Math.floor(length / 2);
-                
-                // Remove the middle element
                 flexContainer.removeChild(divListItems[middleIndex]);
             }
         }
-
-        // Add event listeners to the buttons
         addEndButton.addEventListener('click', addItemEnd);
         addFrontButton.addEventListener('click', addItemFront);
         removeButton.addEventListener('click', removeItem);
+		const promoteButton = document.getElementById("promoteButton");
+        promoteButton.addEventListener("click", promoteItem);
+        function promoteItem() {
+            const divListItems = document.getElementsByClassName("divlist");
+            if (divListItems.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (divListItems.length - 1)) + 1;
+                const selectedItem = divListItems[randomIndex];
+                flexContainer.insertBefore(selectedItem, divListItems[0]);
+            }
+        }
     </script>
-
 </body>
 </html>
